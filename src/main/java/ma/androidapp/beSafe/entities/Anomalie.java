@@ -11,9 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import org.springframework.format.annotation.DateTimeFormat;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -37,6 +34,6 @@ public class Anomalie {
 	@OneToMany(mappedBy = "anomalie")
 	private Collection<Commentaire> commentaires;
 	@ManyToOne
-	private User user;
+	private Users users;
 	private String statutAnomalie;
 }

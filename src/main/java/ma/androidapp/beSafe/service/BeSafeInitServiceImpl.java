@@ -11,16 +11,16 @@ import org.springframework.stereotype.Service;
 import ma.androidapp.beSafe.entities.Anomalie;
 import ma.androidapp.beSafe.entities.Commentaire;
 import ma.androidapp.beSafe.entities.StatutAnomalie;
-import ma.androidapp.beSafe.entities.User;
+import ma.androidapp.beSafe.entities.Users;
 import ma.androidapp.beSafe.repositories.AnomalieRepository;
 import ma.androidapp.beSafe.repositories.CommentaireRepository;
-import ma.androidapp.beSafe.repositories.UserRepository;
+import ma.androidapp.beSafe.repositories.UsersRepository;
 @Service
 @Transactional
 public class BeSafeInitServiceImpl implements IBeSafeInitService{
 
 	@Autowired
-	private UserRepository userRepository;
+	private UsersRepository usersRepository;
 	@Autowired
 	private AnomalieRepository anomalieRepository;
 	@Autowired
@@ -30,20 +30,20 @@ public class BeSafeInitServiceImpl implements IBeSafeInitService{
 	public void initUser() {
 		
 		Stream.of("Achraf", "Zahira", "Oumaima").forEach(v -> {
-			User user = new User();
-			user.setNom(v);
-			user.setPrenom(v);
-			user.setEmail("test1@hotmail.com");
-			user.setPassword("1231");
-			user.setActive(true);
-			userRepository.save(user);
+			Users users = new Users();
+			users.setNom(v);
+			users.setPrenom(v);
+			users.setEmail("test1@hotmail.com");
+			users.setPassword("$2a$10$UCui452QVD.yRBinvpzl/et9XtIQH0tsdctfbv6GZblpSE7zBttEi");
+			users.setActive(true);
+			usersRepository.save(users);
 		});
 		
 	}
 
 	@Override
 	public void initAnomalie() {
-		userRepository.findAll().forEach(user -> {
+		usersRepository.findAll().forEach(user -> {
 			for(int i = 0; i<3;i++) {
 				Anomalie anomalie = new Anomalie();
 				anomalie.setDescription("Ceci est un test de description pour une anomalie !");
@@ -52,7 +52,7 @@ public class BeSafeInitServiceImpl implements IBeSafeInitService{
 				anomalie.setDate_annomalie(new Date());
 				anomalie.setNombreLike(0);
 				anomalie.setStatutAnomalie(StatutAnomalie.ENATTENTE.toString());
-				anomalie.setUser(user);
+				anomalie.setUsers(user);
 				anomalieRepository.save(anomalie);
 			}
 		});		

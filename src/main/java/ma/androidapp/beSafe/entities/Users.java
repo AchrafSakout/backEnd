@@ -21,7 +21,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class User {
+public class Users {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -36,6 +36,6 @@ public class User {
 	private String email;
 	private boolean active;
 	private String password;
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "users")
 	private Collection<Anomalie> anomalies;
 }
